@@ -1,47 +1,106 @@
 <html>
-<head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script></head>
+    <hr>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    </head>
 <body>
-<h3>DECODE & ENCODE - AES</h3>
 
-<span>Dado:</span><br>
-<textarea id="data" rows="5" cols="67"></textarea>
-<br><br>
+    <div id="title">
+            <h3 align="center">DECODE & ENCODE - AES</h3>
+    </div>  
 
-<span>Key:</span>
-<input id="key" size="60" type="text"></input>
-<br><br>
+<form action="#">
+    <span>DADO DECRIPTADO:</span><br><br>
+    <textarea id="data" rows="5" cols="67" placeholder="-Hello World-" ></textarea>
+    <br><br>
+    <hr>
 
-<button onclick="AES_ENCODE()">ENCODE</button>
-<button onclick="AES_DECODE()">DECODE</button>
-<br><br>
+    <span>DADO ENCRIPTADO:</span><br><br>
+    <textarea id="data2" rows="5" cols="67" placeholder="U2FsdGVkX18rWkzCaTx9tGNKOfuAiWqTsCB01o1+9wc=" value="" ></textarea>
+    <br><br>
+    <hr>
 
-<span>Saida:</span>
-<p id="output"></p>
+    <span>Chave:</span><br><br>
+    <input id="key" size="64" type="text" placeholder="14f1d876931252ba283423b0e2b13789" required></input>
+    <br><br>
+
+    <button onclick="AES_ENCODE()">ENCRIPTAR</button>
+    <button onclick="AES_DECODE()">DECRIPTAR</button>
+    <button type="reset">LIMPAR</button>
+    <br><br>
+
+    <div id="saida">
+    <hr>
+    <span hidden>Saida:</span>
+    <p id="output" hidden></p>
+    <hr>
+    </div>
+</form>
+
 
         <script>
-            // AES ENCRIPT_DECRIPT
-           // https://social.msdn.microsoft.com/Forums/pt-BR/47800a60-4461-4f8e-a8d1-751fa62c7884/aes-encrypt-in-javascript-and-decrypt-in-c?forum=csharpgeneral
-          // https://cryptojs.gitbook.io/docs/      
+            //AES ENCRIPT-DECRIPT
+        //https://social.msdn.microsoft.com/Forums/pt-BR/47800a60-4461-4f8e-a8d1-751fa62c7884/aes-encrypt-in-javascript-and-decrypt-in-c?forum=csharpgeneral
+    //https://cryptojs.gitbook.io/docs/      
 
             function AES_ENCODE(){
                 var key = document.getElementById("key").value;
                 var data = document.getElementById("data").value;
                 var encrypted = CryptoJS.AES.encrypt(data, key);
-                document.getElementById("output").innerHTML = "Encode:" + encrypted;
+                document.getElementById("output").innerHTML = encrypted;
+                document.getElementById("data2").value = encrypted;
+                if (data == null){
+                    alert("Campo 'DADO DECRIPTADO' esta vazio.")
+                }
 
             };
 
             function AES_DECODE(){
-                var data = document.getElementById("data").value;
+                var data = document.getElementById("data2").value;
                 var key = document.getElementById("key").value;
                 var decrypted = CryptoJS.AES.decrypt(data, key);
-                document.getElementById("output").innerHTML = "Decode:" + decrypted.toString(CryptoJS.enc.Utf8);
-                //alert(decrypted);
-                //console.log(decrypted);
+                document.getElementById("data").value = decrypted.toString(CryptoJS.enc.Utf8);
+                if (data == "" && key == null){
+                    alert("Campo 'DADO ENCRIPTADO' está vazio.");
+                }
 
             };
 
         </script>
+
+        <style>
+
+            body{
+                background-color: whitesmoke;
+            }
+
+            h3, p, span, button{
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            button{
+                border-radius: 5px;
+                background-color: crimson;
+                color: white;
+            }
+
+            span, button{
+                font-weight: 500;
+            }
+
+            textarea, input{
+                border-radius: 5px;
+            }
+
+            #title{
+                background-color: crimson;
+                color: white;
+                border-radius: 5px;
+                padding-left: 5px;
+                
+            }
+
+        </style>   
     </body>
 </html>
