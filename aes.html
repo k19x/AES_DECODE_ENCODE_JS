@@ -1,0 +1,47 @@
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script></head>
+<body>
+<h3>DECODE & ENCODE - AES</h3>
+
+<span>Dado:</span><br>
+<textarea id="data" rows="5" cols="67"></textarea>
+<br><br>
+
+<span>Key:</span>
+<input id="key" size="60" type="text"></input>
+<br><br>
+
+<button onclick="AES_ENCODE()">ENCODE</button>
+<button onclick="AES_DECODE()">DECODE</button>
+<br><br>
+
+<span>Saida:</span>
+<p id="output"></p>
+
+        <script>
+            // AES ENCRIPT_DECRIPT
+           // https://social.msdn.microsoft.com/Forums/pt-BR/47800a60-4461-4f8e-a8d1-751fa62c7884/aes-encrypt-in-javascript-and-decrypt-in-c?forum=csharpgeneral
+          // https://cryptojs.gitbook.io/docs/      
+
+            function AES_ENCODE(){
+                var key = document.getElementById("key").value;
+                var data = document.getElementById("data").value;
+                var encrypted = CryptoJS.AES.encrypt(data, key);
+                document.getElementById("output").innerHTML = "Encode:" + encrypted;
+
+            };
+
+            function AES_DECODE(){
+                var data = document.getElementById("data").value;
+                var key = document.getElementById("key").value;
+                var decrypted = CryptoJS.AES.decrypt(data, key);
+                document.getElementById("output").innerHTML = "Decode:" + decrypted.toString(CryptoJS.enc.Utf8);
+                //alert(decrypted);
+                //console.log(decrypted);
+
+            };
+
+        </script>
+    </body>
+</html>
